@@ -1,0 +1,99 @@
+{
+  "_id": "ac776289-abf9-4ea1-8c5e-3a4fae28f09a",
+  "name": "Sistem Nilai",
+  "default": false,
+  "global": false,
+  "sortNum": 10000,
+  "created": "2026-10-29T08:00:00.000Z",
+  "modified": "2026-10-29T08:00:00.000Z",
+  "data": [
+    {
+      "name": "gateway",
+      "value": "http://localhost:3000"
+    },
+    {
+      "name": "nilai_direct",
+      "value": "http://localhost:3001"
+    },
+    {
+      "name": "transkrip_direct",
+      "value": "http://localhost:3002"
+    },
+    {
+      "name": "gateway_secret",
+      "value": "ganti-dengan-gateway-secret-rahasia-abcdef"
+    },
+    {
+      "name": "service_client_id",
+      "value": "service-nilai"
+    },
+    {
+      "name": "service_client_secret",
+      "value": "ganti-dengan-client-secret-service-nilai"
+    },
+    {
+      "name": "dev_admin",
+      "value": "DEV-ADMIN-01"
+    },
+    {
+      "name": "dev_dosen1",
+      "value": "DEV-DOSEN1-01"
+    },
+    {
+      "name": "dev_dosen2",
+      "value": "DEV-DOSEN2-01"
+    },
+    {
+      "name": "dev_mhs1",
+      "value": "DEV-MHS1-01"
+    },
+    {
+      "name": "dev_mhs2",
+      "value": "DEV-MHS2-01"
+    },
+    {
+      "name": "nim_mhs1",
+      "value": "247006111010"
+    },
+    {
+      "name": "nim_mhs2",
+      "value": "247006111038"
+    },
+    {
+      "name": "token_expired",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZG9zZW4iLCJ0eXAiOiJhY2Nlc3MiLCJpYXQiOjE3OTMyNTc2NzksImV4cCI6MTc5MzI1NzczOSwiaXNzIjoic2lzdGVtLW5pbGFpLWdhdGV3YXkiLCJzdWIiOiIyIn0.19vhNHxqn76C_yoifEkMCklPzARoJrO23fipAwsKjVk"
+    },
+    {
+      "name": "token_admin",
+      "value": ""
+    },
+    {
+      "name": "token_dosen1",
+      "value": ""
+    },
+    {
+      "name": "token_dosen2",
+      "value": ""
+    },
+    {
+      "name": "token_mhs1",
+      "value": ""
+    },
+    {
+      "name": "token_mhs2",
+      "value": ""
+    },
+    {
+      "name": "token_service",
+      "value": ""
+    },
+    {
+      "name": "refresh_dosen1",
+      "value": ""
+    },
+    {
+      "name": "refresh_dosen2",
+      "value": ""
+    }
+  ]
+}

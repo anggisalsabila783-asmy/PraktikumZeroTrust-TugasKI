@@ -1,0 +1,1955 @@
+{
+  "_id": "35d417da-c790-43d2-9acb-3a947632e32e",
+  "client": "Thunder Client",
+  "collectionName": "Sistem Nilai - Zero Trust",
+  "dateExported": "2026-10-29T08:00:00.000Z",
+  "version": "1.2",
+  "folders": [
+    {
+      "_id": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "1. Login & Token",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "_id": "851a88ed-1a9e-449f-8a3a-b13d54cc56ad",
+      "name": "2. Verifikasi Token & Device",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "_id": "7ef6723c-2570-4b03-b45d-694dcf51990a",
+      "name": "3. Service tidak bisa diakses langsung",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 30000
+    },
+    {
+      "_id": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "4. Nilai (GET & PUT)",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 40000
+    },
+    {
+      "_id": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "5. Finalisasi & Transkrip",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 50000
+    },
+    {
+      "_id": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "6. POST /transkrip/sinkron (hanya token service)",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 60000
+    },
+    {
+      "_id": "0827424a-baad-42f5-96b2-e063920e6ab2",
+      "name": "7. Jam Akses (MANUAL: ubah .env lalu restart)",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 70000
+    },
+    {
+      "_id": "64cc49ed-6ab8-4e1c-9028-0598ac7c27e3",
+      "name": "8. Refresh & Logout",
+      "containerId": "",
+      "created": "2026-10-29T08:00:00.000Z",
+      "sortNum": 80000
+    }
+  ],
+  "requests": [
+    {
+      "_id": "207f5bfb-225f-4b2e-9306-742515467077",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "Login admin",
+      "url": "{{gateway}}/auth/login",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_admin}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token_admin}}"
+        }
+      ]
+    },
+    {
+      "_id": "8e9d7b5c-8561-4de0-9c36-9a68714491d5",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "Login dosen1",
+      "url": "{{gateway}}/auth/login",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"dosen1\",\n  \"password\": \"dosen123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token_dosen1}}"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.refresh_token",
+          "action": "setto",
+          "value": "{{refresh_dosen1}}"
+        }
+      ]
+    },
+    {
+      "_id": "7019323d-731c-40f7-8fdf-56cb1f4292b6",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "Login dosen2",
+      "url": "{{gateway}}/auth/login",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"dosen2\",\n  \"password\": \"dosen123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token_dosen2}}"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.refresh_token",
+          "action": "setto",
+          "value": "{{refresh_dosen2}}"
+        }
+      ]
+    },
+    {
+      "_id": "fd6ba2ef-96c4-41b1-a28f-7577f297f2b4",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "Login mhs1",
+      "url": "{{gateway}}/auth/login",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"mhs1\",\n  \"password\": \"mahasiswa123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token_mhs1}}"
+        }
+      ]
+    },
+    {
+      "_id": "938b45c3-8706-4e18-b52a-d181583218bf",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "Login mhs2",
+      "url": "{{gateway}}/auth/login",
+      "method": "POST",
+      "sortNum": 50000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"mhs2\",\n  \"password\": \"mahasiswa123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token_mhs2}}"
+        }
+      ]
+    },
+    {
+      "_id": "12049af4-0a17-4842-b288-1ff9e7c0bd1a",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "Token service (client id + secret)",
+      "url": "{{gateway}}/auth/service",
+      "method": "POST",
+      "sortNum": 60000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"client_id\": \"{{service_client_id}}\",\n  \"client_secret\": \"{{service_client_secret}}\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token_service}}"
+        }
+      ]
+    },
+    {
+      "_id": "32646bb8-5636-4003-ba1e-47ad1fc6e594",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "[TOLAK] Login password salah",
+      "url": "{{gateway}}/auth/login",
+      "method": "POST",
+      "sortNum": 70000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"mhs1\",\n  \"password\": \"salah-total\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "df81655d-9aa2-45e1-8c88-871c77dd33e8",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "[TOLAK] Login dari device tidak terdaftar",
+      "url": "{{gateway}}/auth/login",
+      "method": "POST",
+      "sortNum": 80000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"mhs1\",\n  \"password\": \"mahasiswa123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "339faba8-0143-45d0-bf0a-5a59fcc66e91",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "[TOLAK] Token service dengan secret salah",
+      "url": "{{gateway}}/auth/service",
+      "method": "POST",
+      "sortNum": 90000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"client_id\": \"{{service_client_id}}\",\n  \"client_secret\": \"salah\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "50affd06-0c36-47d5-8645-8b31896e0cf1",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "2f1b5e1e-46ad-4a44-835c-c57e3b6e739a",
+      "name": "Refresh access token dosen1",
+      "url": "{{gateway}}/auth/refresh",
+      "method": "POST",
+      "sortNum": 100000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refresh_token\": \"{{refresh_dosen1}}\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "set-env-var",
+          "custom": "json.access_token",
+          "action": "setto",
+          "value": "{{token_dosen1}}"
+        }
+      ]
+    },
+    {
+      "_id": "3a9c99e6-84ac-483a-a50f-9ac8a6015787",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "851a88ed-1a9e-449f-8a3a-b13d54cc56ad",
+      "name": "[TOLAK] Tanpa token",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "845dd110-266c-4e55-9aad-c78a105dd4f9",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "851a88ed-1a9e-449f-8a3a-b13d54cc56ad",
+      "name": "[TOLAK] Token ngawur",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer abc.def.ghi"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "59e011d2-f442-4795-8b03-3116ba0a7183",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "851a88ed-1a9e-449f-8a3a-b13d54cc56ad",
+      "name": "[TOLAK] Token kedaluwarsa",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_expired}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "4bd0ad0c-8167-4cfe-a418-57b5e80d846d",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "851a88ed-1a9e-449f-8a3a-b13d54cc56ad",
+      "name": "[TOLAK] Device milik user lain (token mhs1 + device mhs2)",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "d41325b5-c57b-46ca-bbe2-87e414cd9713",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "851a88ed-1a9e-449f-8a3a-b13d54cc56ad",
+      "name": "[TOLAK] Tanpa header X-Device-ID",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "23e5db8f-f936-4569-992a-6d93cb6cb5ce",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "7ef6723c-2570-4b03-b45d-694dcf51990a",
+      "name": "[TOLAK] Langsung ke :3001 tanpa header apa pun",
+      "url": "{{nilai_direct}}/nilai",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "5bfea623-61ac-4564-9f7f-8a981ddf6916",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "7ef6723c-2570-4b03-b45d-694dcf51990a",
+      "name": "[TOLAK] Langsung ke :3001 dengan secret salah",
+      "url": "{{nilai_direct}}/nilai",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Gateway-Secret",
+          "value": "salah"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "1c8e2eed-53d4-4b4e-9083-ed6f8fdd49a7",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "7ef6723c-2570-4b03-b45d-694dcf51990a",
+      "name": "[TOLAK] Langsung ke :3001 token valid TANPA secret",
+      "url": "{{nilai_direct}}/nilai",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "bd6ef62e-044b-48b3-96ba-96ab55f83410",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "7ef6723c-2570-4b03-b45d-694dcf51990a",
+      "name": "[TOLAK] Langsung ke :3001 secret benar TANPA token",
+      "url": "{{nilai_direct}}/nilai",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "X-Gateway-Secret",
+          "value": "{{gateway_secret}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "c492ba62-ecb1-41de-8db3-80b5f2e07088",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "7ef6723c-2570-4b03-b45d-694dcf51990a",
+      "name": "[TOLAK] Langsung ke :3002 secret benar + token kedaluwarsa",
+      "url": "{{transkrip_direct}}/transkrip/{{nim_mhs1}}",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_expired}}"
+        },
+        {
+          "name": "X-Gateway-Secret",
+          "value": "{{gateway_secret}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "e90975a8-b3bd-45ca-8a59-c1ea5a0332de",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "7ef6723c-2570-4b03-b45d-694dcf51990a",
+      "name": "[TOLAK] Langsung ke :3002 tanpa header apa pun",
+      "url": "{{transkrip_direct}}/transkrip/{{nim_mhs1}}",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "cfd9bf3a-bc27-4457-9572-1ce6393530e8",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "Mahasiswa 1 lihat nilai sendiri (2 baris)",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.jumlah",
+          "action": "equal",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "_id": "7e49b50d-315d-47df-88c1-6dda9e080d7e",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "Dosen 1 lihat nilai kelasnya (3 baris)",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.jumlah",
+          "action": "equal",
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "_id": "ff1ef640-f2aa-4603-a9a7-a728306bff8e",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "Dosen 1 lihat kelas 1 (diampu)",
+      "url": "{{gateway}}/nilai?kelas_id=1",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "6dddaba9-f927-40f9-a501-8b0a79aa6961",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "[TOLAK] Dosen 1 lihat kelas 2 (bukan miliknya)",
+      "url": "{{gateway}}/nilai?kelas_id=2",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "1ac2b04f-2fa4-41a1-adf9-874e4f7f95e0",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "[TOLAK] Mahasiswa 1 minta nilai NIM mahasiswa 2",
+      "url": "{{gateway}}/nilai?nim={{nim_mhs2}}",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "84eece85-18e7-488c-8ace-b2e47a50a800",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "[TOLAK] Admin lihat nilai (bukan haknya)",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_admin}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_admin}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "697e47bb-0378-446b-9c24-f5b927a8a5a6",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "Dosen 1 ubah nilai id 1 (kelas 1) jadi 92",
+      "url": "{{gateway}}/nilai/1",
+      "method": "PUT",
+      "sortNum": 70000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nilai\": 92\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "0538789c-82f2-4366-b156-bf702fa04bfe",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "[TOLAK] Dosen 2 ubah nilai id 1 (kelas milik dosen 1)",
+      "url": "{{gateway}}/nilai/1",
+      "method": "PUT",
+      "sortNum": 80000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen2}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nilai\": 10\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "88ffdb90-cef7-4424-95fe-5ebaa1acd07b",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "[TOLAK] Mahasiswa ubah nilai sendiri",
+      "url": "{{gateway}}/nilai/1",
+      "method": "PUT",
+      "sortNum": 90000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nilai\": 100\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "255afb84-986f-42d8-8bd0-450e781613f7",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "[TOLAK] Nilai id tidak ada (404)",
+      "url": "{{gateway}}/nilai/9999",
+      "method": "PUT",
+      "sortNum": 100000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nilai\": 80\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "404"
+        }
+      ]
+    },
+    {
+      "_id": "1cc94db9-5bee-4735-87cb-468d647d86cd",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "8e9a21be-0a84-4534-95fa-040cbacdebce",
+      "name": "[TOLAK] Nilai di luar rentang 0-100 (ditolak service, 400)",
+      "url": "{{gateway}}/nilai/1",
+      "method": "PUT",
+      "sortNum": 110000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nilai\": 150\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ]
+    },
+    {
+      "_id": "29b904f2-f0b1-4a75-b281-b64357cbab55",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "Transkrip mhs1 SEBELUM finalisasi (kosong)",
+      "url": "{{gateway}}/transkrip/{{nim_mhs1}}",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.jumlah_mk",
+          "action": "equal",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "_id": "2ef28ef9-6554-4ee9-b3c9-9814e202b42c",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "[TOLAK] Dosen 2 finalisasi kelas 1 (bukan miliknya)",
+      "url": "{{gateway}}/kelas/1/finalisasi",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen2}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "520ba68f-4a6f-46c2-8d03-e838458f9367",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "[TOLAK] Mahasiswa finalisasi kelas",
+      "url": "{{gateway}}/kelas/1/finalisasi",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "6d9b7ebd-b7a1-4e9b-b6f2-c87e3f9f0a8e",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "Dosen 1 finalisasi kelas 1 (otomatis sinkron ke transkrip lewat gateway)",
+      "url": "{{gateway}}/kelas/1/finalisasi",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.sinkron.jumlah",
+          "action": "equal",
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "_id": "c2592813-ac7c-4a92-8d21-26347432f1aa",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "[TOLAK] Finalisasi kelas 1 untuk kedua kali (409)",
+      "url": "{{gateway}}/kelas/1/finalisasi",
+      "method": "POST",
+      "sortNum": 50000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "409"
+        }
+      ]
+    },
+    {
+      "_id": "079c7567-773e-4d29-a1c0-b2012f48946a",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "[TOLAK] Ubah nilai yang sudah final",
+      "url": "{{gateway}}/nilai/1",
+      "method": "PUT",
+      "sortNum": 60000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nilai\": 50\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "ed984e38-a85f-4f21-b39d-63c348125abb",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "Transkrip mhs1 SETELAH finalisasi (1 mata kuliah)",
+      "url": "{{gateway}}/transkrip/{{nim_mhs1}}",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.jumlah_mk",
+          "action": "equal",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "_id": "d00633e2-ee95-4e64-9905-66e2eec68129",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "[TOLAK] Mahasiswa 1 buka transkrip mahasiswa 2",
+      "url": "{{gateway}}/transkrip/{{nim_mhs2}}",
+      "method": "GET",
+      "sortNum": 80000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "464ed1fa-6afe-4659-ab97-70598a1ca8df",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "Admin buka transkrip mahasiswa 2",
+      "url": "{{gateway}}/transkrip/{{nim_mhs2}}",
+      "method": "GET",
+      "sortNum": 90000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_admin}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_admin}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "585c2446-3663-4efd-90f5-643d5d1f88cb",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "Admin buka transkrip mahasiswa 1",
+      "url": "{{gateway}}/transkrip/{{nim_mhs1}}",
+      "method": "GET",
+      "sortNum": 100000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_admin}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_admin}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "81b57bad-5fff-4ab1-9d02-177a4e8232c8",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "d7b2dca4-3293-47c1-8f4c-8d9d63171039",
+      "name": "[TOLAK] Dosen buka transkrip (bukan haknya)",
+      "url": "{{gateway}}/transkrip/{{nim_mhs1}}",
+      "method": "GET",
+      "sortNum": 110000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "df2c651e-0960-4fd2-a52f-4268f901a514",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "[TOLAK] Sinkron pakai token dosen",
+      "url": "{{gateway}}/transkrip/sinkron",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"kelas_id\": 9,\n  \"kode_mk\": \"UJI001\",\n  \"nama_mk\": \"Uji Sinkron\",\n  \"items\": [\n    {\n      \"nim\": \"{{nim_mhs1}}\",\n      \"nilai\": 70\n    }\n  ]\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "bb12bf2b-fcf6-433e-926f-8f40420c66e1",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "[TOLAK] Sinkron pakai token admin",
+      "url": "{{gateway}}/transkrip/sinkron",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_admin}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_admin}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"kelas_id\": 9,\n  \"kode_mk\": \"UJI001\",\n  \"nama_mk\": \"Uji Sinkron\",\n  \"items\": [\n    {\n      \"nim\": \"{{nim_mhs1}}\",\n      \"nilai\": 70\n    }\n  ]\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "323aaf6a-ec65-41d7-a948-85f9c9a5b727",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "[TOLAK] Sinkron pakai token mahasiswa",
+      "url": "{{gateway}}/transkrip/sinkron",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_mhs1}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_mhs1}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"kelas_id\": 9,\n  \"kode_mk\": \"UJI001\",\n  \"nama_mk\": \"Uji Sinkron\",\n  \"items\": [\n    {\n      \"nim\": \"{{nim_mhs1}}\",\n      \"nilai\": 70\n    }\n  ]\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "1d4534a7-69fe-4b34-9a47-3c2f257544c7",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "[TOLAK] Sinkron tanpa token",
+      "url": "{{gateway}}/transkrip/sinkron",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"kelas_id\": 9,\n  \"kode_mk\": \"UJI001\",\n  \"nama_mk\": \"Uji Sinkron\",\n  \"items\": [\n    {\n      \"nim\": \"{{nim_mhs1}}\",\n      \"nilai\": 70\n    }\n  ]\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "8bf0e298-ed8e-4b36-8531-f574c4bdd448",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "Sinkron pakai token service",
+      "url": "{{gateway}}/transkrip/sinkron",
+      "method": "POST",
+      "sortNum": 50000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_service}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"kelas_id\": 9,\n  \"kode_mk\": \"UJI001\",\n  \"nama_mk\": \"Uji Sinkron\",\n  \"items\": [\n    {\n      \"nim\": \"{{nim_mhs1}}\",\n      \"nilai\": 70\n    }\n  ]\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "26ddead0-3042-488c-aab0-ca1958cbb8f3",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "[TOLAK] Token service dipakai untuk GET /nilai",
+      "url": "{{gateway}}/nilai",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_service}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "846773e2-c6c1-42e9-b8b9-92c6fd9675eb",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0f79f86f-fcdc-4581-b113-9c6bdc328dbf",
+      "name": "[TOLAK] Endpoint tidak dikenal (default deny)",
+      "url": "{{gateway}}/admin/rahasia",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_admin}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_admin}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "403"
+        }
+      ]
+    },
+    {
+      "_id": "6f184eea-09e4-4a3a-87a4-884247c739ad",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0827424a-baad-42f5-96b2-e063920e6ab2",
+      "name": "Dosen 2 ubah nilai id 4 (403 jika di luar jam, 200 jika dalam jam)",
+      "url": "{{gateway}}/nilai/4",
+      "method": "PUT",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen2}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nilai\": 85\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "d7e2501a-9962-4094-8b9f-61fd45303839",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "0827424a-baad-42f5-96b2-e063920e6ab2",
+      "name": "Dosen 2 finalisasi kelas 2 (403 jika di luar jam)",
+      "url": "{{gateway}}/kelas/2/finalisasi",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token_dosen2}}"
+        },
+        {
+          "name": "X-Device-ID",
+          "value": "{{dev_dosen2}}"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "none",
+        "raw": "",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "12c361f9-ef75-4514-9599-9212a7725545",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "64cc49ed-6ab8-4e1c-9028-0598ac7c27e3",
+      "name": "Refresh dosen2 (masih valid)",
+      "url": "{{gateway}}/auth/refresh",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refresh_token\": \"{{refresh_dosen2}}\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "6c9ae820-4ae4-4898-b50d-4dfc7f156e8f",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "64cc49ed-6ab8-4e1c-9028-0598ac7c27e3",
+      "name": "Logout dosen2 (refresh token dicabut)",
+      "url": "{{gateway}}/auth/logout",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refresh_token\": \"{{refresh_dosen2}}\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "18ea7ac4-a997-4bd4-98fb-c42aa2c6c15d",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "64cc49ed-6ab8-4e1c-9028-0598ac7c27e3",
+      "name": "[TOLAK] Refresh setelah logout",
+      "url": "{{gateway}}/auth/refresh",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refresh_token\": \"{{refresh_dosen2}}\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    },
+    {
+      "_id": "c3cfc289-d041-47c3-91dd-e68a1b7e2313",
+      "colId": "35d417da-c790-43d2-9acb-3a947632e32e",
+      "containerId": "64cc49ed-6ab8-4e1c-9028-0598ac7c27e3",
+      "name": "[TOLAK] Logout lagi dengan token yang sudah dicabut",
+      "url": "{{gateway}}/auth/logout",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2026-10-29T08:00:00.000Z",
+      "modified": "2026-10-29T08:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refresh_token\": \"{{refresh_dosen2}}\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "401"
+        }
+      ]
+    }
+  ]
+}

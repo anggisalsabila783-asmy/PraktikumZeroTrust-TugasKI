@@ -1,0 +1,23 @@
+{
+  "name": "sistem-nilai-zero-trust",
+  "version": "1.0.0",
+  "description": "Tugas Praktikum Zero Trust - Sistem Nilai (API Gateway sebagai PEP)",
+  "private": true,
+  "scripts": {
+    "seed": "node db/seed.js",
+    "start": "node scripts/start-all.js",
+    "gateway": "node gateway/index.js",
+    "nilai": "node service-nilai/index.js",
+    "transkrip": "node service-transkrip/index.js",
+    "audit": "node scripts/audit.js",
+    "expired-token": "node scripts/expired-token.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^12.11.1",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "http-proxy-middleware": "^3.0.10",
+    "jsonwebtoken": "^9.0.3"
+  }
+}
