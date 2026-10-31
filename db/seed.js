@@ -80,9 +80,9 @@ const seed = db.transaction(() => {
     ['admin',  'admin123',     'Admin Prodi',         'admin',     null,        'DEV-ADMIN-01'],
     ['dosen1', 'dosen123',     'Dr. Budi Santoso',    'dosen',     null,        'DEV-DOSEN1-01'],
     ['dosen2', 'dosen123',     'Dr. Siti Rahma',      'dosen',     null,        'DEV-DOSEN2-01'],
-    ['mhs1',   'mahasiswa123', 'Andi Pratama',        'mahasiswa', '247006111010', 'DEV-MHS1-01'],
-    ['mhs2',   'mahasiswa123', 'Bella Safira',        'mahasiswa', '247006111038', 'DEV-MHS2-01'],
-    ['mhs3',   'mahasiswa123', 'Citra Lestari',       'mahasiswa', '247006111100', 'DEV-MHS3-01'],
+    ['mhs1',   'mahasiswa123', 'Andi Pratama',        'mahasiswa', '227006001', 'DEV-MHS1-01'],
+    ['mhs2',   'mahasiswa123', 'Bella Safira',        'mahasiswa', '227006002', 'DEV-MHS2-01'],
+    ['mhs3',   'mahasiswa123', 'Citra Lestari',       'mahasiswa', '227006003', 'DEV-MHS3-01'],
   ];
   const id = {};
   for (const [u, p, nama, role, nim, dev] of akun) {
@@ -97,8 +97,8 @@ const seed = db.transaction(() => {
 
   // nilai awal (belum final). nilai.id 1-3 = kelas 1, nilai.id 4-6 = kelas 2
   const addNilai = db.prepare('INSERT INTO nilai (kelas_id,nim,nilai,final) VALUES (?,?,?,0)');
-  [['247006111010', 85], ['247006111038', 78], ['247006111100', 90]].forEach(([n, v]) => addNilai.run(k1, n, v));
-  [['247006111010', 80], ['247006111038', 88], ['247006111100', 75]].forEach(([n, v]) => addNilai.run(k2, n, v));
+  [['227006001', 85], ['227006002', 78], ['227006003', 90]].forEach(([n, v]) => addNilai.run(k1, n, v));
+  [['227006001', 80], ['227006002', 88], ['227006003', 75]].forEach(([n, v]) => addNilai.run(k2, n, v));
 });
 seed();
 

@@ -10,7 +10,10 @@
     "nilai": "node service-nilai/index.js",
     "transkrip": "node service-transkrip/index.js",
     "audit": "node scripts/audit.js",
-    "expired-token": "node scripts/expired-token.js"
+    "expired-token": "node scripts/expired-token.js",
+    "uji": "node scripts/uji-otomatis.js",
+    "uji:semua": "node scripts/uji-otomatis.js --semua",
+    "uji:langkah": "node scripts/uji-otomatis.js --langkah"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

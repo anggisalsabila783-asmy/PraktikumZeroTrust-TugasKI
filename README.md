@@ -37,9 +37,9 @@ Log juga tampil real-time di terminal gateway dengan awalan `[AUDIT]`.
 | admin | admin123 | admin | – | `DEV-ADMIN-01` |
 | dosen1 | dosen123 | dosen (mengampu kelas 1) | – | `DEV-DOSEN1-01` |
 | dosen2 | dosen123 | dosen (mengampu kelas 2) | – | `DEV-DOSEN2-01` |
-| mhs1 | mahasiswa123 | mahasiswa | 247006111010 | `DEV-MHS1-01` |
-| mhs2 | mahasiswa123 | mahasiswa | 247006111038 | `DEV-MHS2-01` |
-| mhs3 | mahasiswa123 | mahasiswa | 247006111100 | `DEV-MHS3-01` |
+| mhs1 | mahasiswa123 | mahasiswa | 227006001 | `DEV-MHS1-01` |
+| mhs2 | mahasiswa123 | mahasiswa | 227006002 | `DEV-MHS2-01` |
+| mhs3 | mahasiswa123 | mahasiswa | 227006003 | `DEV-MHS3-01` |
 
 Kelas: **1** = Keamanan Informasi (dosen1), **2** = Basis Data (dosen2).
 Nilai: id 1–3 milik kelas 1 (mhs1..mhs3), id 4–6 milik kelas 2. Semua nilai awal terisi dan belum final.
@@ -55,6 +55,20 @@ Kredensial Service Nilai: `client_id` = `service-nilai`, `client_secret` dari `.
 
 Jika import environment gagal, buat manual variabel: `gateway`, `nilai_direct`, `transkrip_direct`, `gateway_secret`, `service_client_id`, `service_client_secret`, `dev_admin`, `dev_dosen1`, `dev_dosen2`, `dev_mhs1`, `dev_mhs2`, `nim_mhs1`, `nim_mhs2`, `token_expired`, `token_admin`, `token_dosen1`, `token_dosen2`, `token_mhs1`, `token_mhs2`, `token_service`, `refresh_dosen1`, `refresh_dosen2` (nilainya ada di file environment).
 Jika `JWT_SECRET` di `.env` diganti, buat ulang `token_expired` dengan `npm run expired-token`.
+
+## 4A. Uji otomatis (tanpa input manual)
+Tanpa Thunder Client sekalipun, seluruh skenario bisa dijalankan satu perintah (server harus sudah jalan lewat `npm start`):
+
+```bash
+npm run uji            # 28 skenario inti (nomor [x.y] sama dengan naskah video)
+npm run uji:semua      # 56 skenario lengkap
+npm run uji:langkah    # satu skenario per Enter, menampilkan request & response (cocok untuk demo video)
+```
+- Token, device ID, NIM, dan secret diambil otomatis dari `.env` dan database, jadi tidak ada yang perlu disalin.
+- Data demo di-reset otomatis di awal (tanpa restart server), jadi perintah ini bisa diulang berkali-kali.
+- Skenario **[TOLAK]** dinyatakan `OK` jika memang ditolak dengan status yang benar; alasan penolakan ditampilkan di sebelahnya.
+- Skenario jam akses ([7.1]) bersifat manual (`INFO`): ubah `ACCESS_START`/`ACCESS_END` di `.env`, restart server, lalu jalankan `npm run uji`.
+- Di luar jam 07.00-21.00 WIB, ubah dulu `.env` ke `00:00`-`24:00` dan restart server, kalau tidak, ubah nilai & finalisasi akan ditolak (ini perilaku yang benar).
 
 ### Demo "jam akses" (folder 7)
 Edit `.env`, lalu restart `npm start`:
@@ -98,6 +112,6 @@ service-nilai/      index.js, gatewayClient.js (panggil gateway untuk token serv
 service-transkrip/  index.js
 shared/             config.js, db.js, verify.js (secret + JWT di service), time.js (jam akses)
 db/seed.js          skema + data awal
-scripts/            start-all.js, audit.js, expired-token.js
+scripts/            start-all.js, audit.js, expired-token.js, uji-otomatis.js
 thunder-client/     koleksi + environment untuk Thunder Client
 ```
